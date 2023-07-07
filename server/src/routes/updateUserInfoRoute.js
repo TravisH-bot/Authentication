@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { ObjectID } from "mongodb";
+import { ObjectId } from "mongodb";
 import { getDbConnection } from "../db.js";
 
 export const updateUserInfoRoute = {
@@ -9,12 +9,11 @@ export const updateUserInfoRoute = {
     const { authorization } = req.headers;
     const { userId } = req.params;
 
-    const updates = ({ favoriteFood, hairColor, bio }) =>
-      ({
-        favoriteFood,
-        hairColor,
-        bio,
-      }(req.body));
+    const updates = (({ favoriteFood, hairColor, bio }) => ({
+      favoriteFood,
+      hairColor,
+      bio,
+    }))(req.body);
 
     if (!authorization) {
       return res.status(401), json({ message: "No authorization header sent" });
@@ -38,7 +37,7 @@ export const updateUserInfoRoute = {
       const result = await db
         .collection("users")
         .findOneAndUpdate(
-          { _id: ObjectID(id) },
+          { _id: new ObjectId(id) },
           { $set: { info: updates } },
           { returnOriginal: false }
         );
