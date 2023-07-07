@@ -64,9 +64,10 @@ export const UserInfoPage = () => {
   };
 
   const logOut = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
     // We'll want to log the user out here
     // and send them to the "login page"
-    alert("Log out functionality not implemented yet");
   };
 
   const resetValues = () => {
