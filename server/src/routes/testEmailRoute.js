@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { sendEmail } from "../util/sendEmail.js";
 import Mailgen from "mailgen";
 
 // test account
@@ -49,17 +50,6 @@ export const realEmailRoute = {
   method: "post",
   handler: async (req, res) => {
     const { userEmail } = req.body;
-
-    let config = {
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
-      },
-    };
-
-    let transporter = nodemailer.createTransport(config);
-
     let MailGenerator = new Mailgen({
       theme: "default",
       product: {
@@ -85,20 +75,48 @@ export const realEmailRoute = {
       },
     };
     let mail = MailGenerator.generate(response);
-
-    let message = {
-      from: process.env.EMAIL,
-      to: userEmail,
-      subject: "Place Order",
-      html: mail,
-    };
-    transporter
-      .sendMail(message)
-      .then(() => {
-        return res.status(201).json({ msg: "Get message!" });
-      })
-      .catch((error) => {
-        return res.status(500).json({ error });
+    try {
+      await sendEmail({
+        from: process.env.EMAIL,
+        to: userEmail,
+        subject: "Place Order",
+        html: mail,
       });
+      res.status(201).json({ msg: "Get message!" });
+    } catch (e) {
+      res.status(500).json({ error });
+    }
+
+    // let config = {
+    //   service: "gmail",
+    //   auth: {
+    //     user: process.env.EMAIL,
+    //     pass: process.env.PASSWORD,
+    //   },
+    // };
+
+    // let transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     user: process.env.EMAIL,
+    //     pass: process.env.PASSWORD,
+    //   },
+    // });
+
+    // let message = {
+    //   from: process.env.EMAIL,
+    //   to: userEmail,
+    //   subject: "Place Order",
+    //   html: "<p>test</P>",
+    // };
+
+    // transporter
+    //   .sendMail(message)
+    //   .then(() => {
+    //     return res.status(201).json({ msg: "Get message!" });
+    //   })
+    //   .catch((error) => {
+    //     return res.status(500).json({ error });
+    //   });
   },
 };
