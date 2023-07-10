@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sendEmail = ({ from, to, subject, html }) => {
-  const message = { from, to, subject, html };
+export const sendEmail = ({ from, to, subject, text, html }) => {
+  const message = { from, to, subject, text, html };
   return transporter.sendMail(message);
 };

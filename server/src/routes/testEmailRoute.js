@@ -80,6 +80,7 @@ export const realEmailRoute = {
         from: process.env.EMAIL,
         to: userEmail,
         subject: "Place Order",
+        text: "Thank you for the order",
         html: mail,
       });
       res.status(201).json({ msg: "Get message!" });
