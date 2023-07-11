@@ -28,7 +28,7 @@ const ForgotPasswordPage = () => {
   ) : (
     <div className="content-container">
       <h1>Forgot Password</h1>
-      <p>Enter your email and we will send you a reset link</p>
+      <p>Enter your email and we'll send you a reset link</p>
       {errorMessage && <div className="fail">{errorMessage}</div>}
       <input
         value={emailValue}
