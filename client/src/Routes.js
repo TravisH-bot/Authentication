@@ -5,6 +5,7 @@ import LogInPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import PrivateRoute from "./auth/PrivateRoute";
 import EmailVerificationLandingPage from "./pages/EmailVerificationLandingPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 
 export const MyRoutes = () => {
   return (
@@ -17,6 +18,7 @@ export const MyRoutes = () => {
           path="/verify-email/:verificationString"
           element={<EmailVerificationLandingPage />}
         />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/please-verify" element={<PleaseVerifyEmailPage />} />
         <Route path="/login" element={<LogInPage />}></Route>
         <Route path="/signup" element={<SignUpPage />} />
