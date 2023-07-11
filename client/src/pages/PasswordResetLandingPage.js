@@ -54,3 +54,5 @@ const PasswordResetLandingPage = () => {
     </div>
   );
 };
+
+export default PasswordResetLandingPage;
