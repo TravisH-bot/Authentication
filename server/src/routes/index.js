@@ -7,9 +7,11 @@ import { updateUserInfoRoute } from "./updateUserInfoRoute.js";
 import { realEmailRoute } from "./testEmailRoute.js";
 import { verifyEmailRoute } from "./verifyEmailRoute.js";
 import { resetPasswordRoute } from "./resetPasswordRoute.js";
+import { getGoogleOauthUrlRoute } from "./getGoogleOauthUrlRoute.js";
 
 export const routes = [
   forgotPasswordRoute,
+  getGoogleOauthUrlRoute,
   loginRoute,
   signUpRoute,
   resetPasswordRoute,
